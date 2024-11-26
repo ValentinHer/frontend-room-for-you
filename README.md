@@ -1,11 +1,11 @@
-#Front-End RoomForYou
+# Front-End RoomForYou
 
-##Instalacion
-```
-npm i
+## Instalacion
+```bash
+$ npm i
 ```
 
-##Inicializacion
-```
-npm run dev
+## Inicializacion
+```bash
+$ npm run dev
 ```
