@@ -1,7 +1,7 @@
 'use client'
 
 import { Button, Card, Flex, Form, Input, message, Select } from "antd";
-import { createUser } from "hooks/user-hooks";
+import { createUser } from "hooks/user-hook";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
@@ -11,25 +11,21 @@ const { Option } = Select;
 
 const SignUpForm: React.FC = () => {
     const [form] = Form.useForm();
-    const [status, setStatus] = useState({ success: null, message: '' });
     const [messageApi, contextHolder] = message.useMessage();
     const router = useRouter();
 
     const onFinish = async (values: SignUpUser) => {
-        setStatus({ success: null, message: '' });
         const { confirmPassword, ...newUser } = values;
         const result = await createUser(newUser);
-        setStatus({message: result.message, success: result.success});
-
-        if(!status.success) return await error();
-
-        return await success();
+        if(!result.success) return await error(result.message);
+        
+        return await success(result.message);
     }
 
-    const success = async () => {
+    const success = async (message: string) => {
         await messageApi.open({
             type: 'success',
-            content: status.message,
+            content: message,
             style: {
                 marginTop: '5vh'
             }
@@ -38,10 +34,10 @@ const SignUpForm: React.FC = () => {
         router.push('/login');
     }
 
-    const error = async () => {
+    const error = async (message: string) => {
         await messageApi.open({
             type: 'error',
-            content: status.message,
+            content: message,
             style: {
                 marginTop: '5vh'
             }

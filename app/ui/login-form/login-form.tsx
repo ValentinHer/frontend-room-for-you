@@ -1,48 +1,45 @@
 'use client'
 
 import { Button, Card, Form, Input, message } from "antd";
-import { loginUser } from "hooks/user-hooks";
+import { loginUser } from "hooks/user-hook";
 import Link from "next/link";
-import { useRouter } from "next/router";
-import React, { useState } from "react";
-import { LoginUser } from "types/user-types";
+import { useRouter } from "next/navigation";
+import React from "react";
+import { dataLogin, LoginUser } from "types/user-types";
 
 const LoginForm: React.FC = () => {
     const [form] = Form.useForm();
-    const [status, setStatus] = useState({ success: null, message: '' });
     const [messageApi, contextHolder] = message.useMessage();
     const router = useRouter();
 
     const onFinish = async (values: LoginUser) => {
-        setStatus({ success: null, message: '' });
         const result = await loginUser(values);
-        setStatus({ message: result.message, success: result.success });
 
-        if (!status.success) return await error();
+        if (!result.success) return await error(result.message);
 
-        const { data } = result;
+        const {rol, userId} = result.data;
 
-        return await success(data.rol);
+        return await success(rol, result.message);
     }
 
-    const success = async (rol: string) => {
+    const success = async (rol: string, message: string) => {
         await messageApi.open({
             type: 'loading',
-            content: status.message,
+            content: message,
             style: {
                 marginTop: '5vh'
             }
         })
 
-        if (rol === "admin") return router.push('/admin');
-        if (rol === "propietario") return router.push('/owner');
-        if (rol === "cliente") return router.push('/client');
+        if (rol === "admin")return router.push('/admin');
+        if (rol === "propietario")return router.push('/owner');
+        if (rol === "cliente")return router.push('/client');
     }
 
-    const error = async () => {
+    const error = async (message: string) => {
         await messageApi.open({
             type: 'error',
-            content: status.message,
+            content: message,
             style: {
                 marginTop: '5vh'
             }

@@ -23,3 +23,12 @@ export type CreateUser = {
     email: string;
     password: string;
 }
+
+export type userId = {
+    userId: string;
+} 
+
+export type dataLogin = {
+    userId: string;
+    rol: string;
+} 
