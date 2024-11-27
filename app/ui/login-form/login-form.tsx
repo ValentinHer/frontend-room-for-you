@@ -18,6 +18,7 @@ const LoginForm: React.FC = () => {
         if (!result.success) return await error(result.message);
 
         const {rol, userId} = result.data;
+        sessionStorage.setItem("user", userId);
 
         return await success(rol, result.message);
     }

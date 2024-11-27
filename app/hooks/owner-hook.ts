@@ -11,3 +11,12 @@ export const createOwer = async (user: userId) => {
 
     return await response.json();
 }
+
+export const getOwnerByUser = async (userId: string) => {
+    const response = await fetch(`https://clever-kindness-production.up.railway.app/api/owners/by-user/${userId}`, {
+        method: 'GET',
+        credentials: 'include',
+    })
+
+    return await response.json();
+}
