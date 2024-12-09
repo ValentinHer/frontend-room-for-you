@@ -4,8 +4,8 @@ import { Button, Card, Flex, Form, Input, message, Select } from "antd";
 import { createUser } from "hooks/user-hook";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import React, { useState } from "react";
-import { SignUpUser } from "types/user-types";
+import React from "react";
+import { TSignUpUser } from "types/user";
 
 const { Option } = Select;
 
@@ -14,7 +14,7 @@ const SignUpForm: React.FC = () => {
     const [messageApi, contextHolder] = message.useMessage();
     const router = useRouter();
 
-    const onFinish = async (values: SignUpUser) => {
+    const onFinish = async (values: TSignUpUser) => {
         const { confirmPassword, ...newUser } = values;
         const result = await createUser(newUser);
         if(!result.success) return await error(result.message);

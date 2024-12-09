@@ -1,8 +1,8 @@
-import { CreateUser, dataLogin, LoginUser } from "types/user-types";
+import { TCreateUser, TLoginUser } from "types/user";
 import { createOwer } from "./owner-hook";
 import { createClient } from "./client-hook";
 
-export const createUser = async (user: CreateUser) => {
+export const createUser = async (user: TCreateUser) => {
     try {
         const response = await fetch("https://clever-kindness-production.up.railway.app/api/users", {
             headers: {
@@ -36,7 +36,7 @@ export const createUser = async (user: CreateUser) => {
     }
 }
 
-export const loginUser = async (user: LoginUser) => {
+export const loginUser = async (user: TLoginUser) => {
     try {
         const response = await fetch("https://clever-kindness-production.up.railway.app/api/auth/login", {
             headers: {
@@ -57,4 +57,36 @@ export const loginUser = async (user: LoginUser) => {
     } catch (error) {
         return {success: false, message: error.message}
     }
+}
+
+export const logoutUser = async () => {
+    const response = await fetch("https://clever-kindness-production.up.railway.app/api/auth/logout", {
+        headers: {
+            "Content-Type": "application/json; charset=utf-8"
+        },
+        method: "POST",
+        credentials: 'include'
+    })
+
+    const result = await response.json();
+    return {success: true, message: result.message ? "Sesión Finalizada" : "Error al salir"};
+}
+
+export const getUserById = async (userId: string) => {
+    const result = await fetch(`https://clever-kindness-production.up.railway.app/api/users/${userId}`, {
+        method: 'GET',
+        credentials: 'include'
+    })
+
+    return await result.json();
+}
+
+export const getAllUsers = async (page: number = 1, limit: number = 10) => {
+    
+    const result = await fetch(`https://clever-kindness-production.up.railway.app/api/users?page=${page}&limit=${limit}`, {
+        method: 'GET',
+        credentials: 'include'
+    })
+
+    return await result.json();
 }
