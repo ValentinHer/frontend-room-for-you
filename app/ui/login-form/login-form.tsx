@@ -5,14 +5,14 @@ import { loginUser } from "hooks/user-hook";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import React from "react";
-import { dataLogin, LoginUser } from "types/user-types";
+import { TLoginUser } from "types/user";
 
 const LoginForm: React.FC = () => {
     const [form] = Form.useForm();
     const [messageApi, contextHolder] = message.useMessage();
     const router = useRouter();
 
-    const onFinish = async (values: LoginUser) => {
+    const onFinish = async (values: TLoginUser) => {
         const result = await loginUser(values);
 
         if (!result.success) return await error(result.message);
@@ -32,9 +32,9 @@ const LoginForm: React.FC = () => {
             }
         })
 
-        if (rol === "admin")return router.push('/admin');
-        if (rol === "propietario")return router.push('/owner');
-        if (rol === "cliente")return router.push('/client');
+        if (rol === "admin")return router.push('/admin/dashboard');
+        if (rol === "propietario")return router.push('/owner/properties');
+        if (rol === "cliente")return router.push('/client/properties');
     }
 
     const error = async (message: string) => {

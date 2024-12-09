@@ -1,4 +1,6 @@
-export type SignUpUser = {
+import { TRoleData } from "./role";
+
+export type TSignUpUser = {
     firstname: string;
     lastname: string;
     numberPhone: string;
@@ -9,12 +11,12 @@ export type SignUpUser = {
     confirmPassword: string;
 }
 
-export type LoginUser = {
+export type TLoginUser = {
     email: string;
     password: string;
 }
 
-export type CreateUser = {
+export type TCreateUser = {
     firstname: string;
     lastname: string;
     numberPhone: string;
@@ -24,11 +26,19 @@ export type CreateUser = {
     password: string;
 }
 
-export type userId = {
+export type TUserId = {
     userId: string;
 } 
 
-export type dataLogin = {
-    userId: string;
-    rol: string;
-} 
+export type TDataUser = {
+    id: string; 
+    firstname: string; 
+    lastname: string; 
+    numberPhone: string; 
+    email: string; 
+    password: string; 
+    gender: string; 
+    createdAt: string; 
+    updatedAt: string; 
+    role: TRoleData;
+}
