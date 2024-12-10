@@ -40,7 +40,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 components: {
                     Layout: {
                         siderBg: "#011222",
-                        bodyBg: "#ddd"
+                        // bodyBg: "#ddd"
                     }
                 }
             }}
@@ -82,7 +82,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                     </Flex>
                 </Sider>
                 <Lay style={{marginInlineStart: parseInt(`${collapsed ? 90 : 200}`), height: '100%'}} >
-                    <Content style={{overflow: 'initial'}}>
+                    <Content style={{overflow: 'initial'}} >
                         {children}
                     </Content>
                 </Lay>

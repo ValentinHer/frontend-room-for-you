@@ -36,7 +36,7 @@ export default function PropertyCard(data: TData) {
         >
             <Meta
                 title={data.title}
-                description={data.description}
+                description={data.price}
             />
         </Card>
     );

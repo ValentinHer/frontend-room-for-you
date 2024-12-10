@@ -42,7 +42,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
                 components: {
                     Layout: {
                         siderBg: "#011222",
-                        bodyBg: "#ddd"
+                        // bodyBg: "#ddd"
                     }
                 }
             }}

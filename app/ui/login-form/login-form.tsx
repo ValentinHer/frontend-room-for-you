@@ -33,7 +33,7 @@ const LoginForm: React.FC = () => {
         })
 
         if (rol === "admin")return router.push('/admin/dashboard');
-        if (rol === "propietario")return router.push('/owner/properties');
+        if (rol === "propietario")return router.push('/owner/dashboard');
         if (rol === "cliente")return router.push('/client/properties');
     }
 

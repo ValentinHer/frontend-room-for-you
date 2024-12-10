@@ -41,6 +41,8 @@ export default function ModalCreateProperty() {
                 marginTop: '5vh'
             }
         })
+
+        window.location.reload();
     }
 
     const error = async (message: string) => {
